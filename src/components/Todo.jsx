@@ -1,16 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Todo = () => {
+const Todo = ({ id, content, compeleted, toggleCompelete, deleteTodo }) => {
   return (
-    <div className="w-full bg-gray-900 px-4 py-2 rounded-md my-3 flex items-center justify-between">
+    <div
+      id={id}
+      className="w-full bg-gray-900 px-4 py-2 rounded-md my-3 flex items-center justify-between"
+    >
       <div className="flex items-center justify-between gap-3">
-        <input id="check" type="checkbox" />
-        <label htmlFor="check" className="text-2xl">
-          hello
+        <input
+          id={id}
+          onChange={(e) => {
+            toggleCompelete(e.target.parentElement.parentElement.id);
+          }}
+          checked={compeleted}
+          type="checkbox"
+        />
+        <label htmlFor={id} className="text-2xl">
+          {compeleted && (
+            <p className="line-through text-gray-500">{content}</p>
+          )}
+          {!compeleted && <p>{content}</p>}
         </label>
       </div>
       <div className="flex items-center">
-        <button className="bg-red-600 px-2 py-1 rounded-md">
+        <button
+          onClick={(e) => {
+            deleteTodo(e.target.parentElement.parentElement.parentElement.id);
+          }}
+          className="bg-red-600 px-2 py-1 rounded-md"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 
-const Form = ({ setTodo }) => {
+const Form = ({addTodo}) => {
+  
   const [todoContent, setTodoContent] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    addTodo({content:todoContent,compeleted:false});
+    setTodoContent("")
   };
 
   return (
